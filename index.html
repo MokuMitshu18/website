@@ -1,143 +1,107 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Mount & Tower</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background-image: url('https://images.unsplash.com/photo-1633113214698-485f3d0c9a0b');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: #e5e7eb;
-    }
-    .overlay {
-      background: linear-gradient(180deg, rgba(2,6,23,0.9), rgba(2,6,23,0.75));
-      min-height: 100vh;
-      padding: 20px;
-      animation: fadeIn 1s ease;
-    }
-    h1 {
-      text-align: center;
-      color: #38bdf8;
-      margin-bottom: 12px;
-      animation: slideDown 0.8s ease;
-    }
-    .search-box {
-      max-width: 420px;
-      margin: 0 auto 20px auto;
-      animation: fadeInUp 0.8s ease;
-    }
-    .search-box input {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 14px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      background: #020617;
-      color: #e5e7eb;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
-    }
-    .search-box input:focus {
-      box-shadow: 0 0 0 2px #38bdf8, 0 12px 35px rgba(0,0,0,0.7);
-      transform: scale(1.02);
-    }
-    ol {
-      max-width: 900px;
-      margin: 0 auto;
-      background: rgba(2, 6, 23, 0.9);
-      padding: 20px 40px;
-      border-radius: 18px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      animation: fadeInUp 1s ease;
-    }
-    li {
-      padding: 7px 0;
-      border-bottom: 1px solid #1e293b;
-      transition: color 0.2s ease, transform 0.2s ease;
-    }
-    li:hover {
-      color: #38bdf8;
-      transform: translateX(4px);
-    }
-    li:last-child {
-      border-bottom: none;
-    }
-    .hidden {
-      display: none;
-    }
-    mark {
-      background: linear-gradient(90deg, #38bdf8, #22d3ee);
-      color: #020617;
-      padding: 2px 4px;
-      border-radius: 6px;
-      animation: pulse 1s infinite alternate;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 10px;
-      animation: slideDown 0.8s ease;
-    }
-    .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      box-shadow: 0 0 20px rgba(56,189,248,0.8);
-      animation: float 3s ease-in-out infinite;
-      background: #020617;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0); }
-    }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      from { box-shadow: 0 0 5px rgba(56,189,248,0.6); }
-      to { box-shadow: 0 0 15px rgba(34,211,238,1); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIST MAP AUTO WALK</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d1') center/cover fixed;
+  color:#e5e7eb;
+}
+.overlay{
+  min-height:100vh;
+  background:linear-gradient(180deg,rgba(2,6,23,.9),rgba(2,6,23,.75));
+  padding:20px;
+}
+.header{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  margin-bottom:10px;
+}
+.avatar{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  box-shadow:0 0 20px #38bdf8;
+  animation:float 3s ease-in-out infinite;
+}
+h1{
+  color:#38bdf8;
+  margin:0;
+}
+.search-box{
+  max-width:420px;
+  margin:20px auto 10px;
+}
+.search-box input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  outline:none;
+  background:#020617;
+  color:#e5e7eb;
+  font-size:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,.6);
+}
+#resultCount{
+  text-align:center;
+  margin-bottom:14px;
+  color:#22d3ee;
+  font-weight:600;
+}
+ol{
+  max-width:900px;
+  margin:0 auto;
+  background:rgba(2,6,23,.9);
+  padding:20px 40px;
+  border-radius:18px;
+}
+li{
+  padding:7px 0;
+  border-bottom:1px solid #1e293b;
+}
+li:last-child{border:none;}
+mark{
+  background:linear-gradient(90deg,#38bdf8,#22d3ee);
+  color:#020617;
+  padding:2px 6px;
+  border-radius:6px;
+  animation:pulse 1s infinite alternate;
+}
+
+/* animations */
+.fade-in{animation:fadeInItem .35s ease forwards;}
+.fade-out{animation:fadeOutItem .25s ease forwards;}
+@keyframes fadeInItem{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes fadeOutItem{from{opacity:1}to{opacity:0}}
+@keyframes float{0%{transform:none}50%{transform:translateY(-8px)}100%{transform:none}}
+@keyframes pulse{from{box-shadow:0 0 5px #38bdf8}to{box-shadow:0 0 15px #22d3ee}}
+</style>
 </head>
+
 <body>
-
 <div class="overlay">
-  <div class="header">
-    <img class="avatar" id="avatar" src="https://media.tenor.com/6ZKJx8b8Q3UAAAAC/roblox-dance.gif" alt="Roblox Avatar">
-    <h1>LIST MAP AUTO WALK</h1>
-  </div>
-  <audio id="sfx" preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b7a0b7c2a.mp3" type="audio/mpeg">
-  </audio>
 
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Cari Mount / Tower..." onkeyup="searchList()">
-  </div>
+<div class="header">
+  <img class="avatar" src="https://media.tenor.com/6ZKJx8b8Q3UAAAAC/roblox-dance.gif">
+  <h1>LIST MAP AUTO WALK</h1>
+</div>
 
-  <ol id="mountList">
-    <li>Active Mountains</li>
+<div class="search-box">
+  <input id="searchInput" type="text" placeholder="Cari Mount / Tower..." oninput="searchList()">
+</div>
+
+<div id="resultCount">Menampilkan semua map</div>
+
+<ol id="mountList">
+<li>Active Mountains</li>
     <li>Bali Hot Expedition</li>
     <li>Basic Na Laser Tower</li>
     <li>Ekspedisi Gimmick</li>
@@ -332,73 +296,64 @@
     <li>Rasa Ini Tower 2</li>
     <li>Snowflake Stage Tower</li>
     <li>Village & Mount Pamali</li>
-  </ol>
+</ol>
+
+<!-- SCRIPT ROBLOX -->
+<section style="max-width:800px;margin:40px auto;text-align:center">
+<h2 style="color:#0ff">SCRIPT INI</h2>
+<div style="position:relative;background:#000;border:1px solid #0ff;border-radius:12px;padding:20px">
+<pre id="scriptBox" style="color:#0f0;text-align:left">loadstring(game:HttpGet("https://raw.gatinero.xyz/main.lua"))()</pre>
+<button onclick="copyScript()" style="position:absolute;top:10px;right:10px">COPY</button>
 </div>
-
-<script>
-const bgMusic = document.getElementById('bgMusic');
-
-// Auto play music after first user interaction (browser safe)
-const startMusic = () => {
-  bgMusic.volume = 0.4;
-  bgMusic.play().catch(()=>{});
-  document.removeEventListener('click', startMusic);
-  document.removeEventListener('keydown', startMusic);
-};
-
-document.addEventListener('click', startMusic);
-document.addEventListener('keydown', startMusic);
-</script>
-
-<!-- BACKSOUND MUSIC ROBLOX -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c6b5e4b8d.mp3?filename=game-music-loop-144640.mp3" type="audio/mpeg">
-</audio>
-
-
-
-<script>
-const bgMusic = document.getElementById('bgMusic');
-const musicToggle = document.getElementById('musicToggle');
-let musicOn = false;
-
-musicToggle.addEventListener('click', () => {
-  if (!musicOn) {
-    bgMusic.volume = 0.4;
-    bgMusic.play();
-    musicToggle.innerText = '🔈 ON';
-  } else {
-    bgMusic.pause();
-    musicToggle.innerText = '🔊 MUSIC';
-  }
-  musicOn = !musicOn;
-});
-</script>
-
-<!-- SCRIPT SECTION -->
-<section style="margin:40px auto;max-width:800px;text-align:center;">
-  <h2 style="color:#0ff;text-shadow:0 0 15px #0ff;animation:pulse 2s infinite;">SCRIPT INI</h2>
-  <div style="position:relative;background:rgba(0,0,0,0.7);border:1px solid #0ff;border-radius:12px;padding:20px;box-shadow:0 0 25px rgba(0,255,255,0.4);">
-    <pre id="scriptBox" style="color:#0f0;font-size:14px;text-align:left;overflow:auto;">loadstring(game:HttpGet("https://raw.gatinero.xyz/main.lua"))()</pre>
-    <button onclick="copyScript()" style="position:absolute;top:10px;right:10px;padding:6px 12px;border:none;border-radius:8px;background:#0ff;color:#000;font-weight:bold;cursor:pointer;box-shadow:0 0 10px #0ff;">COPY</button>
-  </div>
 </section>
 
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c6b5e4b8d.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-function copyScript(){
-  const text = document.getElementById('scriptBox').innerText;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn = event.target;
-    btn.innerText = 'COPIED';
-    btn.style.background = '#0f0';
-    setTimeout(()=>{
-      btn.innerText = 'COPY';
-      btn.style.background = '#0ff';
-    },1500);
+/* search + anim + counter + scroll */
+function searchList(){
+  const input=document.getElementById("searchInput").value.toLowerCase();
+  const items=document.querySelectorAll("#mountList li");
+  const counter=document.getElementById("resultCount");
+  let found=0,first=null;
+
+  items.forEach(li=>{
+    const text=li.textContent;
+    li.innerHTML=text;
+    if(text.toLowerCase().includes(input)){
+      found++;
+      li.style.display="list-item";
+      li.className="fade-in";
+      if(!first) first=li;
+      if(input){
+        const r=new RegExp(`(${input})`,"gi");
+        li.innerHTML=text.replace(r,"<mark>$1</mark>");
+      }
+    }else{
+      li.className="fade-out";
+      setTimeout(()=>li.style.display="none",200);
+    }
   });
+
+  counter.textContent=input?`${found} map ditemukan`:"Menampilkan semua map";
+  if(first) first.scrollIntoView({behavior:"smooth",block:"center"});
 }
+
+/* copy script */
+function copyScript(){
+  navigator.clipboard.writeText(document.getElementById("scriptBox").innerText);
+}
+
+/* auto music (browser safe) */
+const music=document.getElementById("bgMusic");
+const start=()=>{music.volume=.4;music.play().catch(()=>{});document.removeEventListener("click",start)};
+document.addEventListener("click",start);
 </script>
 
 </body>
-      </html>
-      
+</html>
