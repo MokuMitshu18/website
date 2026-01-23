@@ -1,181 +1,404 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>ZSH Setup – Termux</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-:root{
-  --bg:#0d1117;
-  --card:#161b22;
-  --border:#30363d;
-  --text:#c9d1d9;
-  --title:#58a6ff;
-  --accent:#2ea043;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:radial-gradient(circle at top,#0d1117,#010409);
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  color:var(--text);
-  padding:30px 16px;
-}
-
-.container{
-  max-width:900px;
-  margin:auto;
-  animation:fadeIn 1s ease;
-}
-
-header{
-  text-align:center;
-  margin-bottom:32px;
-}
-
-header h1{
-  color:var(--title);
-  margin-bottom:6px;
-  animation:glow 2s infinite alternate;
-}
-
-header p{
-  color:#8b949e;
-  font-size:14px;
-}
-
-.step{
-  background:linear-gradient(180deg,#161b22,#0d1117);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px;
-  margin-bottom:18px;
-  opacity:0;
-  transform:translateY(20px);
-  animation:slideUp .6s ease forwards;
-}
-
-.step:nth-child(n){
-  animation-delay:calc(var(--i) * .08s);
-}
-
-.step-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-
-.step-title{
-  font-size:14px;
-  color:#e6edf3;
-}
-
-button{
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:5px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:12px;
-  transition:.2s;
-}
-
-button:hover{
-  border-color:var(--title);
-  color:var(--title);
-  box-shadow:0 0 10px rgba(88,166,255,.25);
-}
-
-pre{
-  margin:0;
-  padding:14px;
-  background:#010409;
-  border-radius:10px;
-  border:1px solid var(--border);
-  overflow-x:auto;
-  font-size:13px;
-  line-height:1.5;
-}
-
-footer{
-  text-align:center;
-  margin-top:40px;
-  font-size:12px;
-  color:#6e7681;
-}
-
-/* Animations */
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-@keyframes slideUp{
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes glow{
-  from{text-shadow:0 0 5px #58a6ff}
-  to{text-shadow:0 0 18px #58a6ff}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Mount & Tower</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1633113214698-485f3d0c9a0b');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #e5e7eb;
+    }
+    .overlay {
+      background: linear-gradient(180deg, rgba(2,6,23,0.9), rgba(2,6,23,0.75));
+      min-height: 100vh;
+      padding: 20px;
+      animation: fadeIn 1s ease;
+    }
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 12px;
+      animation: slideDown 0.8s ease;
+    }
+    .search-box {
+      max-width: 420px;
+      margin: 0 auto 20px auto;
+      animation: fadeInUp 0.8s ease;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: #020617;
+      color: #e5e7eb;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .search-box input:focus {
+      box-shadow: 0 0 0 2px #38bdf8, 0 12px 35px rgba(0,0,0,0.7);
+      transform: scale(1.02);
+    }
+    ol {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(2, 6, 23, 0.9);
+      padding: 20px 40px;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      animation: fadeInUp 1s ease;
+    }
+    li {
+      padding: 7px 0;
+      border-bottom: 1px solid #1e293b;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    li:hover {
+      color: #38bdf8;
+      transform: translateX(4px);
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    .hidden {
+      display: none;
+    }
+    mark {
+      background: linear-gradient(90deg, #38bdf8, #22d3ee);
+      color: #020617;
+      padding: 2px 4px;
+      border-radius: 6px;
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 10px;
+      animation: slideDown 0.8s ease;
+    }
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(56,189,248,0.8);
+      animation: float 3s ease-in-out infinite;
+      background: #020617;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      from { box-shadow: 0 0 5px rgba(56,189,248,0.6); }
+      to { box-shadow: 0 0 15px rgba(34,211,238,1); }
+    }
+  </style>
 </head>
-
 <body>
-<div class="container">
 
-<header>
-  <h1>ZSH Setup for Termux</h1>
-  <p>Modern • Animated • Clean Terminal Guide</p>
-</header>
+<div class="overlay">
+  <div class="header">
+    <img class="avatar" id="avatar" src="https://media.tenor.com/6ZKJx8b8Q3UAAAAC/roblox-dance.gif" alt="Roblox Avatar">
+    <h1>LIST MAP AUTO WALK</h1>
+  </div>
+  <audio id="sfx" preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b7a0b7c2a.mp3" type="audio/mpeg">
+  </audio>
 
-<div class="step" style="--i:1"><div class="step-header"><span class="step-title">STEP 1 – Install ZSH</span><button onclick="copy(this)">COPY</button></div><pre>pkg install zsh</pre></div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Cari Mount / Tower..." onkeyup="searchList()">
+  </div>
 
-<div class="step" style="--i:2"><div class="step-header"><span class="step-title">STEP 2 – Install Oh My Zsh</span><button onclick="copy(this)">COPY</button></div><pre>sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</pre></div>
-
-<div class="step" style="--i:3"><div class="step-header"><span class="step-title">STEP 3 – Powerlevel10k</span><button onclick="copy(this)">COPY</button></div><pre>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k</pre></div>
-
-<div class="step" style="--i:4"><div class="step-header"><span class="step-title">STEP 4 – Install Nano</span><button onclick="copy(this)">COPY</button></div><pre>pkg install nano</pre></div>
-
-<div class="step" style="--i:5"><div class="step-header"><span class="step-title">STEP 5 – Edit Config</span><button onclick="copy(this)">COPY</button></div><pre>nano ~/.zshrc</pre></div>
-
-<div class="step" style="--i:6"><div class="step-header"><span class="step-title">STEP 6 – Set Theme</span><button onclick="copy(this)">COPY</button></div><pre>ZSH_THEME="powerlevel10k/powerlevel10k"</pre></div>
-
-<div class="step" style="--i:7"><div class="step-header"><span class="step-title">STEP 7 – Autosuggestions</span><button onclick="copy(this)">COPY</button></div><pre>git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</pre></div>
-
-<div class="step" style="--i:8"><div class="step-header"><span class="step-title">STEP 8 – Syntax Highlighting</span><button onclick="copy(this)">COPY</button></div><pre>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</pre></div>
-
-<div class="step" style="--i:9"><div class="step-header"><span class="step-title">STEP 9 – Plugins</span><button onclick="copy(this)">COPY</button></div><pre>plugins=(
-git
-bundler
-rbenv
-ruby
-jump
-zsh-autosuggestions
-zsh-syntax-highlighting
-)</pre></div>
-
-<div class="step" style="--i:10"><div class="step-header"><span class="step-title">STEP 10 – Install LSD</span><button onclick="copy(this)">COPY</button></div><pre>apt install lsd</pre></div>
-
-<div class="step" style="--i:11"><div class="step-header"><span class="step-title">STEP 11 – Alias ls</span><button onclick="copy(this)">COPY</button></div><pre>alias ls=lsd</pre></div>
-
-<div class="step" style="--i:12"><div class="step-header"><span class="step-title">STEP 12 – Reload ZSH</span><button onclick="copy(this)">COPY</button></div><pre>source ~/.zshrc</pre></div>
-
-<footer>© 2026 • ZSH Termux Setup</footer>
-
+  <ol id="mountList">
+    <li>Active Mountains</li>
+    <li>Bali Hot Expedition</li>
+    <li>Basic Na Laser Tower</li>
+    <li>Ekspedisi Gimmick</li>
+    <li>Emang Gitu Laser</li>
+    <li>Emang Susah Laser</li>
+    <li>Expedition Antarctica</li>
+    <li>Kent Tower 2</li>
+    <li>Ko Jadi Gini Laser</li>
+    <li>Manouk Obstacle</li>
+    <li>Mount AAAH</li>
+    <li>Mount Adera</li>
+    <li>Mount Aetheria</li>
+    <li>Mount Aetheria WASD</li>
+    <li>Mount Akasha</li>
+    <li>Mount Alas</li>
+    <li>Mount Aluka</li>
+    <li>Mount Anak Senja</li>
+    <li>Mount Aneh Normal</li>
+    <li>Mount Anniversary</li>
+    <li>Mount Antaris</li>
+    <li>Mount Aosora</li>
+    <li>Mount Aquaara</li>
+    <li>Mount Arcana</li>
+    <li>Mount As</li>
+    <li>Mount Astralyn</li>
+    <li>Mount Azunaa</li>
+    <li>Mount Balap Liar</li>
+    <li>Mount Bejirlah</li>
+    <li>Mount Bikin Stres</li>
+    <li>Mount Botol 3</li>
+    <li>Mount Botol 4</li>
+    <li>Mount Budrex</li>
+    <li>Mount Cakep</li>
+    <li>Mount Call</li>
+    <li>Mount Celor</li>
+    <li>Mount Cen Cen</li>
+    <li>Mount Chibi</li>
+    <li>Mount Cinlok</li>
+    <li>Mount Daun</li>
+    <li>Mount Dewe</li>
+    <li>Mount Dontol Awan Kinton</li>
+    <li>Mount Dukun</li>
+    <li>Mount Elystra</li>
+    <li>Mount Eragon</li>
+    <li>Mount Fecha</li>
+    <li>Mount Forever</li>
+    <li>Mount Freestyle</li>
+    <li>Mount FrostPeak</li>
+    <li>Mount Funny</li>
+    <li>Mount Funny WASD</li>
+    <li>Mount Gabut</li>
+    <li>Mount Gebok</li>
+    <li>Mount Gemas</li>
+    <li>Mount Gemi</li>
+    <li>Mount Gemi Coil VIP</li>
+    <li>Mount Gemi WASD</li>
+    <li>Mount Gerengseng</li>
+    <li>Mount Ghibli</li>
+    <li>Mount Ghibli Coil VIP</li>
+    <li>Mount Gini</li>
+    <li>Mount H2C</li>
+    <li>Mount Haku</li>
+    <li>Mount Hanari</li>
+    <li>Mount Harukaze</li>
+    <li>Mount Hayami</li>
+    <li>Mount Hector</li>
+    <li>Mount Hellvi</li>
+    <li>Mount Hexarion</li>
+    <li>Mount Himawari</li>
+    <li>Mount HTS</li>
+    <li>Mount Jadi Jadi</li>
+    <li>Mount Jawa</li>
+    <li>Mount Jawi</li>
+    <li>Mount Kaduhung</li>
+    <li>Mount Kalimantan</li>
+    <li>Mount Kaltim</li>
+    <li>Mount Kanala</li>
+    <li>Mount Kelaz King</li>
+    <li>Mount Kelinci</li>
+    <li>Mount Kelinci Jalan Adit</li>
+    <li>Mount Kelud</li>
+    <li>Mount Keycap</li>
+    <li>Mount Keyy</li>
+    <li>Mount Kidul</li>
+    <li>Mount Kinyis</li>
+    <li>Mount Kita</li>
+    <li>Mount Kiyud</li>
+    <li>Mount Kokas</li>
+    <li>Mount Lancip</li>
+    <li>Mount Lofera</li>
+    <li>Mount Luna</li>
+    <li>Mount Lunaria</li>
+    <li>Mount Mahou</li>
+    <li>Mount Maniez</li>
+    <li>Mount Mbok Darmi</li>
+    <li>Mount Meiran</li>
+    <li>Mount Mistis</li>
+    <li>Mount Molti</li>
+    <li>Mount Mono</li>
+    <li>Mount Mono V2</li>
+    <li>Mount Mono V2 Pro</li>
+    <li>Mount Moonlight V2</li>
+    <li>Mount Morohmoy</li>
+    <li>Mount Mothra</li>
+    <li>Mount Naling</li>
+    <li>Mount Nautica</li>
+    <li>Mount Navia</li>
+    <li>Mount Nebya</li>
+    <li>Mount Nero</li>
+    <li>Mount Newbie V4</li>
+    <li>Mount Ngebut</li>
+    <li>Mount Night Fantasi</li>
+    <li>Mount Oalah</li>
+    <li>Mount Ojek</li>
+    <li>Mount Oxygen</li>
+    <li>Mount Padahal Gampang</li>
+    <li>Mount Pagi</li>
+    <li>Mount Pansos</li>
+    <li>Mount Paralayang</li>
+    <li>Mount Peax</li>
+    <li>Mount Pening</li>
+    <li>Mount Philocalist</li>
+    <li>Mount Pillows</li>
+    <li>Mount Pillows Coil VIP</li>
+    <li>Mount Prambanan</li>
+    <li>Mount Puyo</li>
+    <li>Mount Queen</li>
+    <li>Mount Ragon</li>
+    <li>Mount Raku</li>
+    <li>Mount Ramen</li>
+    <li>Mount Rapuk V2</li>
+    <li>Mount Ravana</li>
+    <li>Mount Roselau</li>
+    <li>Mount Runia</li>
+    <li>Mount S Line</li>
+    <li>Mount Sadewa</li>
+    <li>Mount Sahabat</li>
+    <li>Mount Sakahayang</li>
+    <li>Mount Sakata</li>
+    <li>Mount Sangkala</li>
+    <li>Mount Semut</li>
+    <li>Mount Sendang V2</li>
+    <li>Mount Senja Sunyi</li>
+    <li>Mount Senouk</li>
+    <li>Mount Serenity</li>
+    <li>Mount Seventh Heaven</li>
+    <li>Mount Shin</li>
+    <li>Mount Sijjin</li>
+    <li>Mount SkyAuro</li>
+    <li>Mount Skyfall</li>
+    <li>Mount Skylight</li>
+    <li>Mount Softspoken</li>
+    <li>Mount Space X</li>
+    <li>Mount Sumbing Hard</li>
+    <li>Mount Sumbing Insane 🆕</li>
+    <li>Mount Sumbing Normal</li>
+    <li>Mount Tatto</li>
+    <li>Mount Tebing 100</li>
+    <li>Mount Terapung</li>
+    <li>Mount Tiravena</li>
+    <li>Mount Tranggulasih</li>
+    <li>Mount Uhuy</li>
+    <li>Mount Unyah</li>
+    <li>Mount Vara</li>
+    <li>Mount Velora</li>
+    <li>Mount Velthoria</li>
+    <li>Mount Vetra</li>
+    <li>Mount Wara Wiri</li>
+    <li>Mount Waru</li>
+    <li>Mount Wayang</li>
+    <li>Mount Wek</li>
+    <li>Mount Wing</li>
+    <li>Mount Yah Ayok</li>
+    <li>Mount Yahayuk</li>
+    <li>Mount Yahayuk Goa</li>
+    <li>Mount Yahayuk WASD</li>
+    <li>Mount Yahihi</li>
+    <li>Mount Yans</li>
+    <li>Mount Yareu</li>
+    <li>Mount Yeroo</li>
+    <li>Mount YNTKTS</li>
+    <li>Mount Yoursee</li>
+    <li>Mount Yubi</li>
+    <li>Mount Zephyr</li>
+    <li>Mount Zihan</li>
+    <li>Mount Zodiax</li>
+    <li>Mukjizat Obstacle</li>
+    <li>Namanya Juga Laser Tower</li>
+    <li>Obby Skythera</li>
+    <li>Phonk Tower X</li>
+    <li>Pulau Terapung</li>
+    <li>Rasa Ini Tower 2</li>
+    <li>Snowflake Stage Tower</li>
+    <li>Village & Mount Pamali</li>
+  </ol>
 </div>
 
 <script>
-function copy(btn){
-  const text = btn.parentElement.nextElementSibling.innerText;
-  navigator.clipboard.writeText(text);
-  btn.textContent = "COPIED ✓";
-  setTimeout(()=>btn.textContent="COPY",1200);
+const bgMusic = document.getElementById('bgMusic');
+
+// Auto play music after first user interaction (browser safe)
+const startMusic = () => {
+  bgMusic.volume = 0.4;
+  bgMusic.play().catch(()=>{});
+  document.removeEventListener('click', startMusic);
+  document.removeEventListener('keydown', startMusic);
+};
+
+document.addEventListener('click', startMusic);
+document.addEventListener('keydown', startMusic);
+</script>
+
+<!-- BACKSOUND MUSIC ROBLOX -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c6b5e4b8d.mp3?filename=game-music-loop-144640.mp3" type="audio/mpeg">
+</audio>
+
+
+
+<script>
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+let musicOn = false;
+
+musicToggle.addEventListener('click', () => {
+  if (!musicOn) {
+    bgMusic.volume = 0.4;
+    bgMusic.play();
+    musicToggle.innerText = '🔈 ON';
+  } else {
+    bgMusic.pause();
+    musicToggle.innerText = '🔊 MUSIC';
+  }
+  musicOn = !musicOn;
+});
+</script>
+
+<!-- SCRIPT SECTION -->
+<section style="margin:40px auto;max-width:800px;text-align:center;">
+  <h2 style="color:#0ff;text-shadow:0 0 15px #0ff;animation:pulse 2s infinite;">SCRIPT INI</h2>
+  <div style="position:relative;background:rgba(0,0,0,0.7);border:1px solid #0ff;border-radius:12px;padding:20px;box-shadow:0 0 25px rgba(0,255,255,0.4);">
+    <pre id="scriptBox" style="color:#0f0;font-size:14px;text-align:left;overflow:auto;">loadstring(game:HttpGet("https://raw.gatinero.xyz/main.lua"))()</pre>
+    <button onclick="copyScript()" style="position:absolute;top:10px;right:10px;padding:6px 12px;border:none;border-radius:8px;background:#0ff;color:#000;font-weight:bold;cursor:pointer;box-shadow:0 0 10px #0ff;">COPY</button>
+  </div>
+</section>
+
+<script>
+function copyScript(){
+  const text = document.getElementById('scriptBox').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = event.target;
+    btn.innerText = 'COPIED';
+    btn.style.background = '#0f0';
+    setTimeout(()=>{
+      btn.innerText = 'COPY';
+      btn.style.background = '#0ff';
+    },1500);
+  });
 }
 </script>
+
 </body>
-                                                                                                                </html>
-                                                                                                                
+      </html>
+      
